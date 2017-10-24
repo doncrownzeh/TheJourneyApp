@@ -1,0 +1,26 @@
+sprite_sheet.png
+size: 92, 43
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+aspect_jump
+  rotate: false
+  xy: 0, 0
+  size: 20, 43
+  orig: 20, 43
+  offset: 0, 0
+  index: -1
+aspect_run
+  rotate: false
+  xy: 20, 0
+  size: 52, 36
+  orig: 52, 36
+  offset: 0, 0
+  index: -1
+aspect_stand
+  rotate: false
+  xy: 72, 0
+  size: 20, 40
+  orig: 20, 40
+  offset: 0, 0
+  index: -1
