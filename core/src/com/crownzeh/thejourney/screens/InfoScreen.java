@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
 import com.crownzeh.thejourney.other.Assets;
+import com.crownzeh.thejourney.other.GameConfig;
 
 import java.util.Locale;
 
@@ -47,7 +48,7 @@ public class InfoScreen implements Screen {
         this.sb = sb;
         this.game = game;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT, camera);
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT, camera);
         stage = new Stage(viewport, sb);
 
 

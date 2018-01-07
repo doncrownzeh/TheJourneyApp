@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
 import com.crownzeh.thejourney.other.Assets;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.world.Level;
 
 
@@ -38,7 +39,7 @@ public class LevelSelectionScreen implements Screen {
         this.menuScreen = menuScreen;
         this.theme = theme;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT, camera);
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT, camera);
         background = new Texture("background_texture.png");
         Table levelTable = new Table();
         levelTable.center().top().padTop(15);
@@ -116,7 +117,7 @@ public class LevelSelectionScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(background, 0, 0, TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT);
+        game.batch.draw(background, 0, 0, GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT);
         game.batch.end();
         stage.draw();
     }

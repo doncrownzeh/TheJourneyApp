@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crownzeh.thejourney.TheJourney;
 import com.crownzeh.thejourney.other.Assets;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.other.GameInputProcessor;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -44,7 +45,7 @@ public class ControlOverlay implements Disposable {
         this.theme = theme;
         gameInputProcessor = new GameInputProcessor(sb, player, game);
         camera = new OrthographicCamera();
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT, camera);
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT, camera);
         mainStage = new Stage(viewport, sb);
         menuStage = new Stage(mainStage.getViewport(), mainStage.getBatch());
         deathStage = new Stage(mainStage.getViewport(), mainStage.getBatch());
@@ -59,11 +60,11 @@ public class ControlOverlay implements Disposable {
 
     }
 
-    public boolean isRightPressed() {
+    private boolean isRightPressed() {
         return rightPressed;
     }
 
-    public boolean isLeftPressed() {
+    private boolean isLeftPressed() {
         return leftPressed;
     }
 

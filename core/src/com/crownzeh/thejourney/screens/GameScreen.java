@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.scenes.ControlOverlay;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.sprites.Aspect;
@@ -45,12 +46,12 @@ public class GameScreen implements Screen {
         atlas = new TextureAtlas("characters/sprite_sheet.txt");
         this.game = game;
         gameCamera = new OrthographicCamera();
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH / TheJourney.PIXELS_PER_METER,
-                TheJourney.VIRTUAL_HEIGHT / TheJourney.PIXELS_PER_METER, gameCamera);
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH / GameConfig.PIXELS_PER_METER,
+                GameConfig.VIRTUAL_HEIGHT / GameConfig.PIXELS_PER_METER, gameCamera);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load(level);
-        mapRenderer = new OrthogonalTiledMapRenderer(map, 1 / TheJourney.PIXELS_PER_METER);
-        gameCamera.position.set(TheJourney.VIRTUAL_WIDTH / 2, TheJourney.VIRTUAL_HEIGHT / 2, 0);
+        mapRenderer = new OrthogonalTiledMapRenderer(map, 1 / GameConfig.PIXELS_PER_METER);
+        gameCamera.position.set(GameConfig.VIRTUAL_WIDTH / 2, GameConfig.VIRTUAL_HEIGHT / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2ddr = new Box2DDebugRenderer();
         if (Gdx.app.getType() == Application.ApplicationType.Android) {

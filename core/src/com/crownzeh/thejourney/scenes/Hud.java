@@ -14,7 +14,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.sprites.Aspect;
+
+import java.util.Locale;
 
 public class Hud implements Disposable {
 
@@ -37,7 +40,7 @@ public class Hud implements Disposable {
     public Hud(SpriteBatch sb, Aspect player, TheJourney game) {
         this.game = game;
         this.player = player;
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
         coin = new Image(new Texture("coin.png"));
         coin.setSize(15, 15);
@@ -48,12 +51,12 @@ public class Hud implements Disposable {
         table.left().top().padTop(10);
         table.setFillParent(true);
         coinLabel = new Label(coinInfo, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        heartsLeftLabel = new Label(String.format(" x " + "%01d", player.getHealth()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelIndexLabel = new Label(String.format("%1d", game.getCurrentLevel().getId()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        heartsLeftLabel = new Label(String.format(Locale.US," x " + "%01d", player.getHealth()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelIndexLabel = new Label(String.format(Locale.US,"%1d", game.getCurrentLevel().getId()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelNameLabel = new Label(game.getCurrentLevel().getLevelName(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        highscoreLabel = new Label(String.format("%5d", game.getCurrentLevel().getHighscore()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        highscoreLabel = new Label(String.format(Locale.US,"%5d", game.getCurrentLevel().getHighscore()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         highscoreDisplayLabel = new Label("Highscore", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%5d", player.getScore()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format(Locale.US,"%5d", player.getScore()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreDisplayLabel = new Label("Score", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(levelNameLabel);
@@ -82,9 +85,9 @@ public class Hud implements Disposable {
     private void updateLabels() {
         coinInfo = " x " + player.getVirtualCoins() + " / " + game.getCurrentLevel().getAmountOfCoins();
         coinLabel.setText(coinInfo);
-        heartsLeftLabel.setText(String.format(" x " + "%01d", player.getHealth()));
-        scoreLabel.setText(String.format("%5d", player.getScore()));
-        highscoreLabel.setText(String.format("%5d", game.getCurrentLevel().getHighscore()));
+        heartsLeftLabel.setText(String.format(Locale.US," x " + "%01d", player.getHealth()));
+        scoreLabel.setText(String.format(Locale.US,"%5d", player.getScore()));
+        highscoreLabel.setText(String.format(Locale.US,"%5d", game.getCurrentLevel().getHighscore()));
     }
 
     @Override

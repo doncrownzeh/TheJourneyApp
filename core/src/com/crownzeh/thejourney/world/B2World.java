@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.screens.GameScreen;
 import com.crownzeh.thejourney.sprites.Aspect;
@@ -68,20 +69,20 @@ public class B2World {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             String name = game.getCurrentLevel().getLevelName();
             int type = -1;
-            if (name == "city") {
+            if (name.equals("city")) {
                 type = 1;
             }
-            if (name == "desert") {
+            if (name.equals("desert")) {
                 type = 2;
             }
-            if (name == "dungeon") {
+            if (name.equals("dungeon")) {
                 type = 3;
             }
             if (game.getCurrentLevel().getId() % 3 == 0) {
                 type = 4;
             }
 
-            soldiers.add(new Soldier(world, gameScreen, rect.getX() / TheJourney.PIXELS_PER_METER, rect.getY() / TheJourney.PIXELS_PER_METER, type));
+            soldiers.add(new Soldier(world, gameScreen, rect.getX() / GameConfig.PIXELS_PER_METER, rect.getY() / GameConfig.PIXELS_PER_METER, type));
         }
 
         // coins layer
@@ -104,11 +105,11 @@ public class B2World {
         return soldiers;
     }
 
-    public void setHud(Hud hud) {
+    private void setHud(Hud hud) {
         this.hud = hud;
     }
 
-    public void setPlayer(Aspect player) {
+    private void setPlayer(Aspect player) {
         this.player = player;
     }
 

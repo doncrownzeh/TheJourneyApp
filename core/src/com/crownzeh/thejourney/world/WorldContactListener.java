@@ -7,13 +7,14 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.sprites.Aspect;
 import com.crownzeh.thejourney.sprites.collision.CollisionObject;
 import com.crownzeh.thejourney.sprites.enemies.Enemy;
 import com.crownzeh.thejourney.sprites.enemies.Soldier;
 
 public class WorldContactListener implements ContactListener {
-    Aspect player;
+    private Aspect player;
 
     public WorldContactListener(Aspect player) {
         super();
@@ -27,21 +28,21 @@ public class WorldContactListener implements ContactListener {
 
         int colisionBits = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
         switch (colisionBits) {
-            case TheJourney.ASPECT_FEET_BIT | TheJourney.ENEMY_HEAD_BIT:
-                if (fixtureA.getFilterData().categoryBits == TheJourney.ENEMY_HEAD_BIT) {
+            case GameConfig.ASPECT_FEET_BIT | GameConfig.ENEMY_HEAD_BIT:
+                if (fixtureA.getFilterData().categoryBits == GameConfig.ENEMY_HEAD_BIT) {
                     ((Enemy) fixtureA.getUserData()).die();
                 } else {
                     ((Enemy) fixtureB.getUserData()).die();
                 }
                 break;
 
-            case TheJourney.ASPECT_BIT | TheJourney.ENEMY_BIT:
+            case GameConfig.ASPECT_BIT | GameConfig.ENEMY_BIT:
                 player.setHealth((short) 0);
                 Gdx.app.log("def", "death");
                 break;
 
-            case TheJourney.ENEMY_BIT | TheJourney.INVISIBLE_WALL_BIT:
-                if (fixtureA.getFilterData().categoryBits == TheJourney.ENEMY_BIT) {
+            case GameConfig.ENEMY_BIT | GameConfig.INVISIBLE_WALL_BIT:
+                if (fixtureA.getFilterData().categoryBits == GameConfig.ENEMY_BIT) {
                     ((Soldier) fixtureA.getUserData()).flipVelocity();
                     Gdx.app.log("flip", "velocity");
                 } else {

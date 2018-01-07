@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.crownzeh.thejourney.TheJourney;
 import com.crownzeh.thejourney.other.Assets;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -20,7 +21,7 @@ public class Spike extends CollisionObject {
         this.hud = hud;
         fixture.setUserData(this);
         fixture.setSensor(true);
-        setCategoryFilter(TheJourney.SPIKE_BIT);
+        setCategoryFilter(GameConfig.SPIKE_BIT);
     }
 
     @Override

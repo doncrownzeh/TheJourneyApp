@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
 import com.crownzeh.thejourney.other.Assets;
+import com.crownzeh.thejourney.other.GameConfig;
 
 
 public class WinScreen implements Screen {
@@ -37,7 +38,7 @@ public class WinScreen implements Screen {
         theme.play();
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT, camera);
+        viewport = new FitViewport(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT, camera);
 
         background = new Texture("end_background.png");
         menuButton = new Image(new Texture("buttons/btn_main_menu.png"));
@@ -76,7 +77,7 @@ public class WinScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(background, 0, 0, TheJourney.VIRTUAL_WIDTH, TheJourney.VIRTUAL_HEIGHT);
+        game.batch.draw(background, 0, 0, GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT);
         game.batch.end();
         stage.draw();
 

@@ -13,13 +13,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.screens.GameScreen;
 
 
 public class Aspect extends Sprite {
 
-    public State currentState;
-    public State previousState;
+    private State currentState;
+    private State previousState;
     public World world;
     public Body body;
     public boolean doubleJump;
@@ -63,7 +64,7 @@ public class Aspect extends Sprite {
         defineAspect();
         aspectStand = new TextureRegion(new Texture("characters/aspect_stand.png"), 0, 0, 20, 40);
         aspectJump = new TextureRegion(new Texture("characters/aspect_jump.png"), 0, 0, 20, 43);
-        setBounds(0, 0, 20 / TheJourney.PIXELS_PER_METER, 40 / TheJourney.PIXELS_PER_METER);
+        setBounds(0, 0, 20 / GameConfig.PIXELS_PER_METER, 40 / GameConfig.PIXELS_PER_METER);
         setRegion(aspectStand);
         health = 3;
         virtualCoins = 0;
@@ -90,25 +91,25 @@ public class Aspect extends Sprite {
         }
     }
 
-    public TextureRegion getFrame(float delta) {
+    private TextureRegion getFrame(float delta) {
         currentState = getState();
         TextureRegion region;
         switch (currentState) {
             case RUNNING:
                 region = (TextureRegion) aspectRun.getKeyFrame(stateTimer, true);
-                setBounds(0, 0, 22 / TheJourney.PIXELS_PER_METER, 40 / TheJourney.PIXELS_PER_METER);
+                setBounds(0, 0, 22 / GameConfig.PIXELS_PER_METER, 40 / GameConfig.PIXELS_PER_METER);
                 setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
                 break;
             case JUMPING:
             case FALLING:
                 region = aspectJump;
-                setBounds(0, 0, 20 / TheJourney.PIXELS_PER_METER, 43 / TheJourney.PIXELS_PER_METER);
+                setBounds(0, 0, 20 / GameConfig.PIXELS_PER_METER, 43 / GameConfig.PIXELS_PER_METER);
                 setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
                 break;
             case STANDING:
             default:
                 region = aspectStand;
-                setBounds(0, 0, 20 / TheJourney.PIXELS_PER_METER, 40 / TheJourney.PIXELS_PER_METER);
+                setBounds(0, 0, 20 / GameConfig.PIXELS_PER_METER, 40 / GameConfig.PIXELS_PER_METER);
                 setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
                 break;
         }
@@ -126,7 +127,7 @@ public class Aspect extends Sprite {
         return region;
     }
 
-    public State getState() {
+    private State getState() {
         if (body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if (body.getLinearVelocity().y < 0)
@@ -137,51 +138,51 @@ public class Aspect extends Sprite {
             return State.STANDING;
     }
 
-    public void defineAspect() {
+    private void defineAspect() {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(100 / TheJourney.PIXELS_PER_METER, 200 / TheJourney.PIXELS_PER_METER);
+        bodyDef.position.set(100 / GameConfig.PIXELS_PER_METER, 200 / GameConfig.PIXELS_PER_METER);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = TheJourney.ASPECT_BIT;
-        fixtureDef.filter.maskBits = TheJourney.HEART_BIT |
-                TheJourney.COIN_BIT |
-                TheJourney.DEFAULT_BIT |
-                TheJourney.ENEMY_BIT |
-                TheJourney.ENEMY_HEAD_BIT |
-                TheJourney.SPIKE_BIT;
+        fixtureDef.filter.categoryBits = GameConfig.ASPECT_BIT;
+        fixtureDef.filter.maskBits = GameConfig.HEART_BIT |
+                GameConfig.COIN_BIT |
+                GameConfig.DEFAULT_BIT |
+                GameConfig.ENEMY_BIT |
+                GameConfig.ENEMY_HEAD_BIT |
+                GameConfig.SPIKE_BIT;
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10 / TheJourney.PIXELS_PER_METER, 20 / TheJourney.PIXELS_PER_METER);
+        shape.setAsBox(10 / GameConfig.PIXELS_PER_METER, 20 / GameConfig.PIXELS_PER_METER);
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef).setUserData("aspect");
 
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-9 / TheJourney.PIXELS_PER_METER, 20 / TheJourney.PIXELS_PER_METER), new Vector2(9 / TheJourney.PIXELS_PER_METER, 20 / TheJourney.PIXELS_PER_METER));
+        head.set(new Vector2(-9 / GameConfig.PIXELS_PER_METER, 20 / GameConfig.PIXELS_PER_METER), new Vector2(9 / GameConfig.PIXELS_PER_METER, 20 / GameConfig.PIXELS_PER_METER));
         fixtureDef.shape = head;
         fixtureDef.isSensor = true;
-        fixtureDef.filter.maskBits = TheJourney.DEFAULT_BIT;
+        fixtureDef.filter.maskBits = GameConfig.DEFAULT_BIT;
         body.createFixture(fixtureDef).setUserData("head");
 
         EdgeShape leftEdge = new EdgeShape();
-        leftEdge.set(new Vector2(-10 / TheJourney.PIXELS_PER_METER, -19 / TheJourney.PIXELS_PER_METER), new Vector2(-10 / TheJourney.PIXELS_PER_METER, 19 / TheJourney.PIXELS_PER_METER));
+        leftEdge.set(new Vector2(-10 / GameConfig.PIXELS_PER_METER, -19 / GameConfig.PIXELS_PER_METER), new Vector2(-10 / GameConfig.PIXELS_PER_METER, 19 / GameConfig.PIXELS_PER_METER));
         fixtureDef.shape = leftEdge;
         fixtureDef.isSensor = true;
-        fixtureDef.filter.maskBits = TheJourney.DEFAULT_BIT;
+        fixtureDef.filter.maskBits = GameConfig.DEFAULT_BIT;
         body.createFixture(fixtureDef).setUserData("left_edge");
 
         EdgeShape rightEdge = new EdgeShape();
-        rightEdge.set(new Vector2(10 / TheJourney.PIXELS_PER_METER, -19 / TheJourney.PIXELS_PER_METER), new Vector2(10 / TheJourney.PIXELS_PER_METER, 19 / TheJourney.PIXELS_PER_METER));
+        rightEdge.set(new Vector2(10 / GameConfig.PIXELS_PER_METER, -19 / GameConfig.PIXELS_PER_METER), new Vector2(10 / GameConfig.PIXELS_PER_METER, 19 / GameConfig.PIXELS_PER_METER));
         fixtureDef.shape = rightEdge;
         fixtureDef.isSensor = true;
         body.createFixture(fixtureDef).setUserData("right_edge");
 
         EdgeShape feet = new EdgeShape();
-        feet.set(new Vector2(-9 / TheJourney.PIXELS_PER_METER, -20 / TheJourney.PIXELS_PER_METER), new Vector2(9 / TheJourney.PIXELS_PER_METER, -20 / TheJourney.PIXELS_PER_METER));
+        feet.set(new Vector2(-9 / GameConfig.PIXELS_PER_METER, -20 / GameConfig.PIXELS_PER_METER), new Vector2(9 / GameConfig.PIXELS_PER_METER, -20 / GameConfig.PIXELS_PER_METER));
         fixtureDef.shape = feet;
-        fixtureDef.filter.categoryBits = TheJourney.ASPECT_FEET_BIT;
-        fixtureDef.filter.maskBits = TheJourney.ENEMY_HEAD_BIT | TheJourney.DEFAULT_BIT;
+        fixtureDef.filter.categoryBits = GameConfig.ASPECT_FEET_BIT;
+        fixtureDef.filter.maskBits = GameConfig.ENEMY_HEAD_BIT | GameConfig.DEFAULT_BIT;
         fixtureDef.isSensor = true;
         body.createFixture(fixtureDef).setUserData("feet");
     }
@@ -209,7 +210,7 @@ public class Aspect extends Sprite {
         virtualCoins++;
     }
 
-    public void updateScore(float delta) {
+    private void updateScore(float delta) {
         scoreTimer += delta;
         if (scoreTimer > 0.5f && score > 0) {
             score -= 10;
@@ -217,7 +218,7 @@ public class Aspect extends Sprite {
         }
     }
 
-    public void death() {
+    private void death() {
         destroyBody = true;
     }
 

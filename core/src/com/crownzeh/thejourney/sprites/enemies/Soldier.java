@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.GameConfig;
 import com.crownzeh.thejourney.screens.GameScreen;
 
 
@@ -63,13 +64,13 @@ public class Soldier extends Enemy {
         walk = new Animation<Object>(0.15f, frames);
         enemyDead = new TextureRegion(new Texture(deathPath), 0, 0, 40, 20);
         frameTimer = 0;
-        setBounds(x, y, 22 / TheJourney.PIXELS_PER_METER, 40 / TheJourney.PIXELS_PER_METER);
+        setBounds(x, y, 22 / GameConfig.PIXELS_PER_METER, 40 / GameConfig.PIXELS_PER_METER);
     }
 
     public void update(float delta) {
         frameTimer += delta;
         if (destroyBody && !destroyed) {
-            setBounds(getX(), getY(), 40 / TheJourney.PIXELS_PER_METER, 20 / TheJourney.PIXELS_PER_METER);
+            setBounds(getX(), getY(), 40 / GameConfig.PIXELS_PER_METER, 20 / GameConfig.PIXELS_PER_METER);
             screen.getPlayer().setScore(screen.getPlayer().getScore() + 150);
             setRegion(enemyDead);
             world.destroyBody(this.body);
@@ -91,25 +92,25 @@ public class Soldier extends Enemy {
         body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = TheJourney.ENEMY_BIT;
-        fixtureDef.filter.maskBits = TheJourney.ASPECT_BIT |
-                TheJourney.DEFAULT_BIT |
-                TheJourney.ENEMY_BIT |
-                TheJourney.INVISIBLE_WALL_BIT;
+        fixtureDef.filter.categoryBits = GameConfig.ENEMY_BIT;
+        fixtureDef.filter.maskBits = GameConfig.ASPECT_BIT |
+                GameConfig.DEFAULT_BIT |
+                GameConfig.ENEMY_BIT |
+                GameConfig.INVISIBLE_WALL_BIT;
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10 / TheJourney.PIXELS_PER_METER, 20 / TheJourney.PIXELS_PER_METER);
+        shape.setAsBox(10 / GameConfig.PIXELS_PER_METER, 20 / GameConfig.PIXELS_PER_METER);
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef).setUserData(this);
 
         PolygonShape head = new PolygonShape();
-        fixtureDef.filter.categoryBits = TheJourney.ENEMY_HEAD_BIT;
-        fixtureDef.filter.maskBits = TheJourney.ASPECT_BIT | TheJourney.ASPECT_FEET_BIT;
+        fixtureDef.filter.categoryBits = GameConfig.ENEMY_HEAD_BIT;
+        fixtureDef.filter.maskBits = GameConfig.ASPECT_BIT | GameConfig.ASPECT_FEET_BIT;
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-11, 25).scl(1 / TheJourney.PIXELS_PER_METER);
-        vertice[1] = new Vector2(11, 25).scl(1 / TheJourney.PIXELS_PER_METER);
-        vertice[2] = new Vector2(-9, 19).scl(1 / TheJourney.PIXELS_PER_METER);
-        vertice[3] = new Vector2(9, 19).scl(1 / TheJourney.PIXELS_PER_METER);
+        vertice[0] = new Vector2(-11, 25).scl(1 / GameConfig.PIXELS_PER_METER);
+        vertice[1] = new Vector2(11, 25).scl(1 / GameConfig.PIXELS_PER_METER);
+        vertice[2] = new Vector2(-9, 19).scl(1 / GameConfig.PIXELS_PER_METER);
+        vertice[3] = new Vector2(9, 19).scl(1 / GameConfig.PIXELS_PER_METER);
         head.set(vertice);
         fixtureDef.shape = head;
         fixtureDef.restitution = 0.6f;
