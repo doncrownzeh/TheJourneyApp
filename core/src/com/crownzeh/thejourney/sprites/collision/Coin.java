@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -27,7 +28,7 @@ public class Coin extends CollisionObject {
     public void onHit() {
         setCategoryFilter(TheJourney.NONE_BIT);
         getCell().setTile(null);
-        TheJourney.assetManager.get("soundtrack/clips/pickup_coin.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/pickup_coin.wav", Sound.class).play();
         player.addCoin();
         hud.update();
 

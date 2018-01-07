@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 
 
 public class MenuScreen implements Screen {
@@ -39,7 +40,7 @@ public class MenuScreen implements Screen {
         this.game = game;
         this.sb = sb;
 
-        theme = TheJourney.assetManager.get("soundtrack/looped/menu_theme.mp3", Music.class);
+        theme = Assets.assetManager.get("soundtrack/looped/menu_theme.mp3", Music.class);
         theme.setLooping(true);
         theme.play();
 
@@ -116,17 +117,17 @@ public class MenuScreen implements Screen {
     }
 
     private void playButtonAction() {
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         game.setScreen(new LevelSelectionScreen(game, sb, this, theme));
     }
 
     private void infoButtonAction() {
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         game.setScreen(new InfoScreen(sb, game, this));
     }
 
     private void exitButtonAction() {
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         Gdx.app.exit();
     }
 

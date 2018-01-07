@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.screens.MenuScreen;
 import com.crownzeh.thejourney.world.Level;
 
@@ -30,7 +31,6 @@ public class TheJourney extends Game {
     public static final short INVISIBLE_WALL_BIT = 128;
     public static final short ASPECT_FEET_BIT = 256;
     public static final short ENEMY_HEAD_BIT = 512;
-    public static AssetManager assetManager;
     public SpriteBatch batch;
     private List<Level> levels = new ArrayList();
     private Level currentLevel;
@@ -39,7 +39,7 @@ public class TheJourney extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        loadAssets();
+        Assets.loadAssets();
         preferences = Gdx.app.getPreferences("level.data");
         loadLevels();
         levels.get(0).setUnlocked(true);
@@ -59,43 +59,27 @@ public class TheJourney extends Game {
     @Override
     public void dispose() {
         batch.dispose();
-        assetManager.dispose();
     }
 
-    private void loadAssets() {
-        assetManager = new AssetManager();
-        assetManager.load("soundtrack/looped/menu_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/city_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/desert_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/death_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/win_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/dungeon_theme.mp3", Music.class);
-        assetManager.load("soundtrack/looped/end_theme.mp3", Music.class);
-        assetManager.load("soundtrack/clips/pickup_coin.wav", Sound.class);
-        assetManager.load("soundtrack/clips/jump.wav", Sound.class);
-        assetManager.load("soundtrack/clips/got_item.mp3", Sound.class);
-        assetManager.load("soundtrack/clips/button.wav", Sound.class);
-        assetManager.load("soundtrack/clips/hurt.wav", Sound.class);
-        assetManager.finishLoading();
-    }
+
 
     private void loadLevels() {
 
         for (int i = 1; i <= 3; i++) {
             boolean unlocked = preferences.getBoolean("city" + i, false);
             levels.add(new Level(i, "city", "levels/testowy" + i + ".tmx",
-                    assetManager.get("soundtrack/looped/city_theme.mp3", Music.class), unlocked));
+                    Assets.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class), unlocked));
 
         }
         for (int i = 4; i <= 6; i++) {
             boolean unlocked = preferences.getBoolean("desert" + i, false);
             levels.add(new Level(i, "desert", "levels/testowy" + i + ".tmx",
-                    assetManager.get("soundtrack/looped/desert_theme.mp3", Music.class), unlocked));
+                    Assets.assetManager.get("soundtrack/looped/desert_theme.mp3", Music.class), unlocked));
         }
         for (int i = 7; i <= 9; i++) {
             boolean unlocked = preferences.getBoolean("dungeon" + i, false);
             levels.add(new Level(i, "dungeon", "levels/testowy" + i + ".tmx",
-                    assetManager.get("soundtrack/looped/dungeon_theme.mp3", Music.class), unlocked));
+                    Assets.assetManager.get("soundtrack/looped/dungeon_theme.mp3", Music.class), unlocked));
         }
 
     }

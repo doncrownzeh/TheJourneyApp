@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -24,7 +25,7 @@ public class Spike extends CollisionObject {
 
     @Override
     public void onHit() {
-        TheJourney.assetManager.get("soundtrack/clips/hurt.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/hurt.wav", Sound.class).play();
         player.setHealth((short) (player.getHealth() - 2));
         hud.update();
     }

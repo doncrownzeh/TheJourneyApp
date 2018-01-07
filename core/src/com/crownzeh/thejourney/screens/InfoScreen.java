@@ -17,6 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
+
+import java.util.Locale;
 
 
 public class InfoScreen implements Screen {
@@ -39,7 +42,7 @@ public class InfoScreen implements Screen {
     private MenuScreen menuScreen;
 
 
-    public InfoScreen(SpriteBatch sb, TheJourney game, MenuScreen menuScreen) {
+    InfoScreen(SpriteBatch sb, TheJourney game, MenuScreen menuScreen) {
         this.menuScreen = menuScreen;
         this.sb = sb;
         this.game = game;
@@ -68,9 +71,10 @@ public class InfoScreen implements Screen {
         resolutionLabel = new Label("Resolution", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         currentResolutionLabel = new Label(resolution, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         versionLabel = new Label("Version", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        currentVersionLabel = new Label(String.format("%01d", Gdx.app.getVersion()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        currentVersionLabel = new Label(String.format(Locale.US, "%01d", Gdx.app.getVersion()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         authorLabel = new Label("Author", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         authorTextLabel = new Label("Jakub Krzetowski", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         table.add(deviceLabel).expandX().padTop(10);
         table.add(deviceVersionLabel).expandX().padTop(10);
@@ -150,7 +154,7 @@ public class InfoScreen implements Screen {
 
     private void backButtonAction() {
 
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         game.setScreen(menuScreen);
     }
 }

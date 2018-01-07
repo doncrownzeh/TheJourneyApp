@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.scenes.Hud;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -27,7 +28,7 @@ public class Heart extends CollisionObject {
     public void onHit() {
         setCategoryFilter(TheJourney.NONE_BIT);
         getCell().setTile(null);
-        TheJourney.assetManager.get("soundtrack/clips/got_item.mp3", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/got_item.mp3", Sound.class).play();
         player.setHealth((short) (player.getHealth() + 1));
         hud.update();
     }

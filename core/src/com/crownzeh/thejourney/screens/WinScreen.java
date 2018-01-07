@@ -15,23 +15,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 
 
 public class WinScreen implements Screen {
-    TheJourney game;
-    SpriteBatch sb;
-    Music theme;
-    OrthographicCamera camera;
-    FitViewport viewport;
-    Image menuButton;
-    Stage stage;
-    Texture background;
+    private TheJourney game;
+    private SpriteBatch sb;
+    private Music theme;
+    private OrthographicCamera camera;
+    private FitViewport viewport;
+    private Image menuButton;
+    private Stage stage;
+    private Texture background;
 
 
     public WinScreen(final SpriteBatch sb, final TheJourney game) {
         this.game = game;
         this.sb = sb;
-        theme = TheJourney.assetManager.get("soundtrack/looped/end_theme.mp3", Music.class);
+        theme = Assets.assetManager.get("soundtrack/looped/end_theme.mp3", Music.class);
         theme.setLooping(true);
         theme.play();
 
@@ -44,8 +45,8 @@ public class WinScreen implements Screen {
         menuButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
-                TheJourney.assetManager.get("soundtrack/looped/end_theme.mp3", Music.class).stop();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/looped/end_theme.mp3", Music.class).stop();
                 game.setScreen(new MenuScreen(sb, game));
                 return super.touchDown(event, x, y, pointer, button);
             }

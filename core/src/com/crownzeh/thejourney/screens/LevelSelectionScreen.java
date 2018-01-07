@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.world.Level;
 
 
@@ -31,7 +32,7 @@ public class LevelSelectionScreen implements Screen {
     private MenuScreen menuScreen;
 
 
-    public LevelSelectionScreen(TheJourney game, SpriteBatch sb, MenuScreen menuScreen, Music theme) {
+    LevelSelectionScreen(TheJourney game, SpriteBatch sb, MenuScreen menuScreen, Music theme) {
         this.game = game;
         this.sb = sb;
         this.menuScreen = menuScreen;
@@ -90,12 +91,12 @@ public class LevelSelectionScreen implements Screen {
 
     private void backButtonAction() {
 
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         game.setScreen(menuScreen);
     }
 
     private void levelButtonAction(Level level) {
-        TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+        Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
         theme.stop();
         game.setCurrentLevel(level);
         Gdx.app.log(game.getCurrentLevel().getLevelPath(), game.getCurrentLevel().getLevelName());

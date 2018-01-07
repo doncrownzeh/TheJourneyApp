@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crownzeh.thejourney.TheJourney;
+import com.crownzeh.thejourney.other.Assets;
 import com.crownzeh.thejourney.other.GameInputProcessor;
 import com.crownzeh.thejourney.sprites.Aspect;
 
@@ -170,7 +171,7 @@ public class ControlOverlay implements Disposable {
         menuButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
                 currentStage = menuStage;
                 return true;
             }
@@ -188,7 +189,7 @@ public class ControlOverlay implements Disposable {
         close.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
                 currentStage = mainStage;
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -198,7 +199,7 @@ public class ControlOverlay implements Disposable {
         restart.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
                 gameInputProcessor.restartLevel();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -208,7 +209,7 @@ public class ControlOverlay implements Disposable {
         exit.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
                 gameInputProcessor.goToMainMenu();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -234,8 +235,8 @@ public class ControlOverlay implements Disposable {
         restartLevel.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
-                TheJourney.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).stop();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).stop();
                 gameInputProcessor.restartLevel();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -245,8 +246,8 @@ public class ControlOverlay implements Disposable {
         exitToMenu.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
-                TheJourney.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).stop();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).stop();
                 gameInputProcessor.goToMainMenu();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -272,8 +273,8 @@ public class ControlOverlay implements Disposable {
         exitToMenu.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
-                TheJourney.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).stop();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).stop();
                 gameInputProcessor.goToMainMenu();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -282,8 +283,8 @@ public class ControlOverlay implements Disposable {
         nextLevel.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                TheJourney.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
-                TheJourney.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).stop();
+                Assets.assetManager.get("soundtrack/clips/button.wav", Sound.class).play();
+                Assets.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).stop();
                 gameInputProcessor.nextLevel();
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -312,7 +313,7 @@ public class ControlOverlay implements Disposable {
         if (!playerAlive) {
             currentStage = deathStage;
             gameInputProcessor.stopLevelMusic();
-            TheJourney.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).play();
+            Assets.assetManager.get("soundtrack/looped/death_theme.mp3", Music.class).play();
         }
         if (player.isFinished()) {
             if (game.getCurrentLevel().getHighscore() < player.getScore()) {
@@ -323,7 +324,7 @@ public class ControlOverlay implements Disposable {
             }
             currentStage = winStage;
             gameInputProcessor.stopLevelMusic();
-            TheJourney.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).play();
+            Assets.assetManager.get("soundtrack/looped/win_theme.mp3", Music.class).play();
 
         }
         handleInput(delta);

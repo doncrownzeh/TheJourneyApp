@@ -25,14 +25,12 @@ public class GameInputProcessor implements InputProcessor {
 
     public void jump() {
         if (player.isNotInTheAir()) {
-            //player.body.applyLinearImpulse(new Vector2(0, 9f), player.body.getWorldCenter(), true);
             player.body.setLinearVelocity(new Vector2(player.body.getLinearVelocity().x, 9.5f));
-            TheJourney.assetManager.get("soundtrack/clips/jump.wav", Sound.class).play();
+            Assets.assetManager.get("soundtrack/clips/jump.wav", Sound.class).play();
         } else if (!player.isNotInTheAir() && player.doubleJump == true) {
             player.doubleJump = false;
-            //player.body.applyLinearImpulse(new Vector2(0, 5f), player.body.getWorldCenter(), true);
             player.body.setLinearVelocity(new Vector2(player.body.getLinearVelocity().x, 9.5f));
-            TheJourney.assetManager.get("soundtrack/clips/jump.wav", Sound.class).play();
+            Assets.assetManager.get("soundtrack/clips/jump.wav", Sound.class).play();
 
         }
     }
@@ -59,9 +57,9 @@ public class GameInputProcessor implements InputProcessor {
     }
 
     public void muteOrUnmute() {
-        if (TheJourney.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).isPlaying()) {
-            TheJourney.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).pause();
-        } else TheJourney.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).play();
+        if (Assets.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).isPlaying()) {
+            Assets.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).pause();
+        } else Assets.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).play();
     }
 
     public void sideArrowUp() {
@@ -89,9 +87,9 @@ public class GameInputProcessor implements InputProcessor {
     }
 
     public void stopLevelMusic() {
-        TheJourney.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).stop();
-        TheJourney.assetManager.get("soundtrack/looped/desert_theme.mp3", Music.class).stop();
-        TheJourney.assetManager.get("soundtrack/looped/dungeon_theme.mp3", Music.class).stop();
+        Assets.assetManager.get("soundtrack/looped/city_theme.mp3", Music.class).stop();
+        Assets.assetManager.get("soundtrack/looped/desert_theme.mp3", Music.class).stop();
+        Assets.assetManager.get("soundtrack/looped/dungeon_theme.mp3", Music.class).stop();
     }
 
     @Override
